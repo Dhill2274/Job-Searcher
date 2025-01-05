@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 
 type ChecklistProps = {
   items: string[];
+  name: string
 };
 
-const Checklist: React.FC<ChecklistProps> = ({ items }) => {
+const Checklist: React.FC<ChecklistProps> = ({items, name }) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const handleChange = (item: string) => {
@@ -18,7 +19,7 @@ const Checklist: React.FC<ChecklistProps> = ({ items }) => {
 
   return (
     <div>
-      <h3>Checklist</h3>
+      <h3>{name}</h3>
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {items.map((item, index) => (
           <li key={index}>

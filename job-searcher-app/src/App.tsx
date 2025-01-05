@@ -19,9 +19,18 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <div style={{ padding: '2rem' }}>
+      <div style={{ display: 'flex', gap: '100px', justifyContent: 'center'}}>
         <Checklist
           items={['Grad Job', 'Internship', 'Year Long Placement']}
+          name='Role Type'
+        />
+        <Checklist
+          items={['Technology', 'Finance']}
+          name='Job Sector'
+        />
+        <Checklist
+          items={['Grad Job', 'Internship', 'Year Long Placement']}
+          name='Region'
         />
       </div>
       <p className="read-the-docs">
