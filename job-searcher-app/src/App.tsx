@@ -2,11 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Checklist from './Checklist';
+import SearchBox from './Searchbox';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const handleSelect = (option: string) => {
-    alert(`You selected: ${option}`);
+  const [results, setResults] = useState<string[]>([]);
+
+  const handleSearch = (query: string) => {
+    console.log("Searching for:", query);
   };
 
   return (
@@ -19,23 +21,29 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+      
       <div style={{ display: 'flex', gap: '100px', justifyContent: 'center'}}>
         <Checklist
           items={['Grad Job', 'Internship', 'Year Long Placement']}
           name='Role Type'
         />
-        <Checklist
-          items={['Technology', 'Finance']}
-          name='Job Sector'
-        />
-        <Checklist
-          items={['Grad Job', 'Internship', 'Year Long Placement']}
-          name='Region'
-        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+        <h1>Search Box Example</h1>
+        <SearchBox placeholder="Type to search..." onSearch={handleSearch} />
+        <div style={{ marginTop: "20px" }}>
+          <h3>Results:</h3>
+          {results.length > 0 && (
+            <ul>
+              {results.map((result, index) => (
+                <li key={index}>{result}</li>
+              ))}
+            </ul>
+            ) 
+          }
+        </div>
+      </div>
     </div>
   )
 }
