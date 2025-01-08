@@ -21,16 +21,9 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      
-      <div style={{ display: 'flex', gap: '100px', justifyContent: 'center'}}>
-        <Checklist
-          items={['Grad Job', 'Internship', 'Year Long Placement']}
-          name='Role Type'
-        />
-      </div>
 
       <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-        <h1>Search Box Example</h1>
+        <h2>Search Box Example</h2>
         <SearchBox placeholder="Type to search..." onSearch={handleSearch} />
         <div style={{ marginTop: "20px" }}>
           <h3>Results:</h3>

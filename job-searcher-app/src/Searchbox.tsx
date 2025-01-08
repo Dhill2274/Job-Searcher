@@ -6,20 +6,34 @@ type SearchBoxProps = {
 };
 
 const SearchBox: React.FC<SearchBoxProps> = ({ placeholder = "Search...", onSearch }) => {
-  const [query, setQuery] = useState("");
+  const [query1, setQuery1] = useState('');
+  const [query2, setQuery2] = useState('');
 
+  const combinedQuery = `${query1} ${query2}`;
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(query); // Pass the search query to the parent component
+    onSearch(combinedQuery); // Pass the search query to the parent component
   };
 
   return (
     <form onSubmit={handleSearch} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
       <input
         type="text"
-        placeholder={placeholder}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        placeholder={"Search jobs, keywords, companies"}
+        value={query1}
+        onChange={(e) => setQuery1(e.target.value)}
+        style={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          flex: "1",
+        }}
+      />
+      <input
+        type="text"
+        placeholder={"Enter location or 'remote'"}
+        value={query2}
+        onChange={(e) => setQuery2(e.target.value)}
         style={{
           padding: "10px",
           border: "1px solid #ccc",
