@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 
-type SearchBoxProps = {
-  placeholder?: string;
-  onSearch: (query: string) => void;
-};
+type SearchBoxProps = {};
 
-const SearchBox: React.FC<SearchBoxProps> = ({ placeholder = "Search...", onSearch }) => {
-  const [query1, setQuery1] = useState('');
-  const [query2, setQuery2] = useState('');
+const SearchBox: React.FC<SearchBoxProps> = () => {
 
-  const combinedQuery = `${query1} ${query2}`;
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(combinedQuery); // Pass the search query to the parent component
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form)
+
+    const formJson = Object.fromEntries(formData.entries());
+    console.log(formJson);
   };
 
   return (
-    <form onSubmit={handleSearch} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+    <form method="post" onSubmit={handleSearch} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
       <input
+        name='Job Info'
         type="text"
         placeholder={"Search jobs, keywords, companies"}
-        value={query1}
-        onChange={(e) => setQuery1(e.target.value)}
         style={{
           padding: "10px",
           border: "1px solid #ccc",
@@ -29,11 +26,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ placeholder = "Search...", onSear
           flex: "1",
         }}
       />
+
       <input
+      name='Location Info'
         type="text"
         placeholder={"Enter location or 'remote'"}
-        value={query2}
-        onChange={(e) => setQuery2(e.target.value)}
         style={{
           padding: "10px",
           border: "1px solid #ccc",
@@ -41,6 +38,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({ placeholder = "Search...", onSear
           flex: "1",
         }}
       />
+
+      <select name="selectedDistance" defaultValue="Default">
+        <option value="Default">Select Distance</option>
+          <option value="10">10 miles</option>
+          <option value="30">30 miles</option>
+          <option value="50">50 miles</option>
+      </select>
+
       <button
         type="submit"
         style={{

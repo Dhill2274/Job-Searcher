@@ -23,8 +23,8 @@ function App() {
       </div>
 
       <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-        <h2>Search Box Example</h2>
-        <SearchBox placeholder="Type to search..." onSearch={handleSearch} />
+        <h2>Search Jobs</h2>
+        <SearchBox/>
         <div style={{ marginTop: "20px" }}>
           <h3>Results:</h3>
           {results.length > 0 && (
