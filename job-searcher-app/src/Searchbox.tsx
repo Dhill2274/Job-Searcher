@@ -10,7 +10,7 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
     const formData = new FormData(form)
 
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
+    {formJson.selectedDistance === 'Default' ? (alert('Please select distance!')) : console.log(formJson)}
   };
 
   return (
@@ -41,8 +41,9 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
 
       <select name="selectedDistance" defaultValue="Default">
         <option value="Default">Select Distance</option>
+          <option value="5">5 miles</option>
           <option value="10">10 miles</option>
-          <option value="30">30 miles</option>
+          <option value="20">20 miles</option>
           <option value="50">50 miles</option>
       </select>
 
