@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-type SearchBoxProps = {};
-
-const SearchBox: React.FC<SearchBoxProps> = () => {
+const SearchBox = () => {
+  const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -10,13 +10,25 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
     const formData = new FormData(form)
 
     const formJson = Object.fromEntries(formData.entries());
-    {formJson.selectedDistance === 'Default' ? (alert('Please select distance!')) : console.log(formJson)}
+      if (formJson.jobInfo === '') {
+      alert('Enter job, keyword or company!');
+    } else if (formJson.location === '') {
+      alert("Enter a location or 'remote'!");
+    } else if (formJson.selectedDistance === 'Default') {
+      alert('Select a distance!');
+    } else {
+      const jobInfo = encodeURIComponent(formJson["jobInfo"] as string);
+      const location = encodeURIComponent(formJson["location"] as string);
+      const distance = encodeURIComponent(formJson["selectedDistance"] as string);
+  
+      navigate(`/Jobs?job=${jobInfo}&location=${location}&distance=${distance}`);
+    }
   };
 
   return (
     <form method="post" onSubmit={handleSearch} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
       <input
-        name='Job Info'
+        name='jobInfo'
         type="text"
         placeholder={"Search jobs, keywords, companies"}
         style={{
@@ -28,7 +40,7 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
       />
 
       <input
-      name='Location Info'
+      name='location'
         type="text"
         placeholder={"Enter location or 'remote'"}
         style={{

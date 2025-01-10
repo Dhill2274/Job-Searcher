@@ -1,36 +1,19 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
-import Checklist from './Checklist';
-import SearchBox from './Searchbox';
+import SearchBox from './Components/Searchbox';
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import {HomePage} from "./Pages/Home";
+import {JobPage} from "./Pages/Jobs";
 
 function App() {
-  const [results, setResults] = useState<string[]>([]);
-
-  const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
-  };
-
   return (
-    <div className="App">
-      <h1>AI Job Searcher</h1>
-      <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-        <h2>Search Jobs</h2>
-        <SearchBox/>
-        <div style={{ marginTop: "20px" }}>
-          <h3>Results:</h3>
-          {results.length > 0 && (
-            <ul>
-              {results.map((result, index) => (
-                <li key={index}>{result}</li>
-              ))}
-            </ul>
-            ) 
-          }
-        </div>
-      </div>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/Jobs" element={<JobPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App

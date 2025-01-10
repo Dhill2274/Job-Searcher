@@ -1,7 +1,9 @@
 {
     "requirements": {
-        "job_types": ["Computer Science"],
-        "regions": ["London"]
+        "jobInfo": "Computer Science",
+        "location": "London"
+        
+
     },
 
     "job_websites": [
@@ -9,21 +11,21 @@
         "name": "Indeed",
         "url": "https://www.indeed.com",
         "supported_job_types": ["Computer Science", "Finance", "Engineering", "Marketing"],
-        "regions": ["North America", "Europe", "Asia", "Australia"],
+        "location": ["North America", "Europe", "Asia", "Australia"],
         "features": ["Internships", "Graduate Jobs"]
       },
       {
         "name": "Glassdoor",
         "url": "https://www.glassdoor.com",
         "supported_job_types": ["Computer Science", "Finance", "Data Science"],
-        "regions": ["North America", "Europe", "South America", "Asia"],
+        "location": ["North America", "Europe", "South America", "Asia"],
         "features": ["Internships", "Graduate Jobs"]
       },
       {
         "name": "LinkedIn",
         "url": "https://www.linkedin.com",
         "supported_job_types": ["Computer Science", "Finance", "Consulting", "Sales"],
-        "regions": ["Global"],
+        "location": ["Global"],
         "features": ["Internships", "Graduate Jobs"]
       },
       {
