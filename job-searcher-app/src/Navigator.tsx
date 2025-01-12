@@ -15,15 +15,26 @@ try {
     await page.waitForSelector('.result-item-selector');
 
     const results = await page.evaluate(() => {
-        // Query all result items on the page
-        return Array.from(document.querySelectorAll('.result-item-selector')).map(
+
+        const result1 = Array.from(document.querySelectorAll('.result-item-selector')).map(
           (item) => ({
             title: item.querySelector('.title-selector')?.textContent,
             link: item.querySelector('a')?.href,
             description: item.querySelector('.description-selector')?.textContent,
           })
         );
+
+        const result2 = Array.from(document.querySelectorAll('.result-item-selector')).map(
+          (item) => ({
+            title: item.querySelector('.title-selector')?.textContent,
+            link: item.querySelector('a')?.href,
+            description: item.querySelector('.description-selector')?.textContent,
+          })
+        );
+
+        return [...result1, ...result2];
       });
+
 } catch (error) {
 
 } finally {
