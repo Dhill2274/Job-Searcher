@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { scrapeData } from "../Scraper";
+import { scrapeData } from "../Server/Scraper";
 import { useEffect, useState } from "react";
 
 type ScrapedData = {
@@ -20,24 +20,41 @@ export function JobPage() {
     const [loading, setLoading] = useState(true); // State to manage loading status
   
     useEffect(() => {
-      const fetchData = async () => {
+      async function fetchData() {
         try {
-          const results = await scrapeData(); // Fetch data asynchronously
-          setData(results); // Update state with the fetched data
-        } catch (error) {
-          console.error("Error fetching data:", error);
+          const res = await fetch("http://localhost:5000/scrape");
+          if (!res.ok) {
+            throw new Error(`Server error: ${res.status}`);
+          }
+          const jsonData: ScrapedData[] = await res.json();
+          setData(jsonData);
+        } catch (err) {
+          console.error("Error fetching:", err);
         } finally {
-          setLoading(false); // Stop loading regardless of success or error
+          setLoading(false);
         }
-      };
-  
-      fetchData(); // Call the async function
+      }
+      fetchData();
     }, []);
   
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div>
         <h1>Job Page</h1>
-        <p>Job Info: {jobInfo}</p>
+        <p>Job Info: {data ? (
+      data.map((job) => (
+        <div key={job.link}>
+          <h2>{job.title}</h2>
+          <a href={job.link}>{job.link}</a>
+          <p>{job.description}</p>
+        </div>
+      ))
+    ) : (
+      <p>Loading or no data</p>
+    )}</p>
         <p>Location Info: {locationInfo}</p>
         <p>Distance: {distance} miles</p>
       </div>
